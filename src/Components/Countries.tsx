@@ -5,11 +5,12 @@ import RegionStore from "../strore/RegionStrore";
 
 const Countries = ({ data }) => {
   const { activeSort } = SortStore();
-  const { regionState } = RegionStore()
-  const {unitedMember, independant} = MemberOrIndependant()
+  const { regionState } = RegionStore();
+  const { unitedMember, independant } = MemberOrIndependant();
 
-  const addVirgule = (num: number): string =>  new Intl.NumberFormat("en-US").format(num);
-  
+  const addVirgule = (num: number): string =>
+    new Intl.NumberFormat("en-US").format(num);
+
   const chooseSort = (value: string, data: any[]) => {
     if (value === "population") {
       return [...data].sort((a, b) => b.population - a.population);
@@ -28,21 +29,24 @@ const Countries = ({ data }) => {
   const sortedData = chooseSort(activeSort, data);
 
   const applyFilter = (data: any[], ...filters) => {
-    return filters.reduce((result, filterFunc) => filterFunc(result), data)
-  }
-  
-  const handleIndependant = (data: any[]) => independant ? [...data].filter(value => !value.independent) : data
-  const handleMember = (data: any[]) => unitedMember ? [...data].filter(value => !value.unMember) : data
-  const handleRegion = (data: any[]) => regionState.length ? [...data].filter(region => regionState.includes(region.continents)) : data
+    return filters.reduce((result, filterFunc) => filterFunc(result), data);
+  };
 
-console.log(data)
+  const handleIndependant = (data: any[]) =>
+    independant ? [...data].filter((value) => value.independent) : data;
+  const handleMember = (data: any[]) =>
+    unitedMember ? [...data].filter((value) => value.unMember) : data;
+  const handleRegion = (data: any[]) =>
+    regionState.length
+      ? [...data].filter((region) => regionState.includes(region.region))
+      : data;
 
   const filteredData = applyFilter(
     sortedData,
     handleIndependant,
     handleMember,
     handleRegion
-  )
+  );
 
   return (
     <table>
@@ -56,8 +60,7 @@ console.log(data)
         </tr>
       </thead>
       <tbody>
-        {filteredData
-        .map((country, index: number) => (
+        {filteredData.map((country, index: number) => (
           <Fragment key={index}>
             <tr className="table-auto text-center text-secondary">
               <td className="text-6xl">{country.flag}</td>
