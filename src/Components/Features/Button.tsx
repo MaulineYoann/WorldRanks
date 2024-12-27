@@ -13,7 +13,6 @@ const Button = ({ children, setSelect, select }: ButtonProps) => {
     if (select.includes(children)) {
       setSelect(select.filter((el) => el !== value));
       setRegionState(prev => prev.filter(item => item !== value))
-
     } else {
       setSelect((prev) => [...prev, value]);
       setRegionState((prev) => [...prev, value])

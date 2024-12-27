@@ -7,7 +7,6 @@ const SelectRegion = () => {
   
   const [select, setSelect] = useState<string[]>([])
 
-
   return (
     <div className="mt-5">
       <label className="block mb-5">

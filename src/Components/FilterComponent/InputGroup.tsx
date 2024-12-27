@@ -7,8 +7,6 @@ const InputGroup = () => {
   const { setActiveSort } = SortStore()
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => setActiveSort(event.target.value)
 
-
-
   return (
     <section className='flex flex-col'>
     <label className='mb-3'>Sort by</label>
@@ -18,8 +16,8 @@ const InputGroup = () => {
         {
           Object
           .keys(sortOption)
-          .map( items => (
-            <option value={items}>{items}</option>
+          .map( (items, index) => (
+            <option key={index} value={items}>{items}</option>
           ))
           }
     </select>

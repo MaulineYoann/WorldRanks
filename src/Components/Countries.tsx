@@ -2,6 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import SortStore from "../strore/SortStore";
 import MemberOrIndependant from "../strore/MemberOrIndependant";
 import RegionStore from "../strore/RegionStrore";
+import { Link } from "react-router-dom";
 
 const Countries = ({ data }) => {
   const { activeSort } = SortStore();
@@ -64,7 +65,11 @@ const Countries = ({ data }) => {
           <Fragment key={index}>
             <tr className="table-auto text-center text-secondary">
               <td className="text-6xl">{country.flag}</td>
-              <td>{country.name.common}</td>
+              <td>
+                <Link to={`/country/${index}`} state={{country}}>
+                  {country.name.common}
+                </Link>
+              </td>
               <td>{addVirgule(country.population)}</td>
               <td>{country.area}</td>
               <td>{country.region}</td>
