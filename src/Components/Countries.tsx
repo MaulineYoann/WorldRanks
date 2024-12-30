@@ -4,7 +4,7 @@ import MemberOrIndependant from "../strore/MemberOrIndependant";
 import RegionStore from "../strore/RegionStrore";
 import { Link } from "react-router-dom";
 
-const Countries = ({ data }) => {
+const Countries = ({ data, search }) => {
   const { activeSort } = SortStore();
   const { regionState } = RegionStore();
   const { unitedMember, independant } = MemberOrIndependant();
@@ -48,8 +48,13 @@ const Countries = ({ data }) => {
     handleMember,
     handleRegion
   );
+const finalFilteredData = search 
+? (filteredData.filter((item) =>  item.region.toLowerCase().includes(search.toLowerCase()) ||
+item.name.common.toLowerCase().includes(search.toLowerCase()) ||
+item.subregion?.toLowerCase().includes(search.toLowerCase()))) : filteredData
 
   return (
+    <>
     <table>
       <thead className="text-primary border-b border-primary">
         <tr>
@@ -78,6 +83,7 @@ const Countries = ({ data }) => {
         ))}
       </tbody>
     </table>
+        </>
   );
 };
 

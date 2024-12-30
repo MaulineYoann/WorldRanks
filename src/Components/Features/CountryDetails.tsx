@@ -9,7 +9,7 @@ const CountryDetails = () => {
 
   const { state } = useLocation();
   const country = state?.country;
-
+  console.log(country)
   const fetchNeighboring = async (country: string[]) => {
     try {
       const response = await fetch("https://restcountries.com/v3.1/all")

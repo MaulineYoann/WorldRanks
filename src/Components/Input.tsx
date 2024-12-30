@@ -1,8 +1,19 @@
-import { useRef } from "react";
+import { useRef, ChangeEvent} from "react";
 
-const Input = () => {
+interface searchProps {
+  state: {
+    search: string
+    setSearch: (event: ChangeEvent<HTMLInputElement>) => string
+  }
+}
+
+const Input = ({state}: searchProps) => {
+
+  const {search, setSearch} = state
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClick = () => inputRef.current?.focus();
+
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)
 
   return (
     <div className="flex bg-[#1B1D1F] rounded-xl items-center px-5 cursor-pointer" onClick={handleClick}>
@@ -23,6 +34,8 @@ const Input = () => {
       </svg>
       <input
         type="text"
+        value={search}
+        onChange={handleSearch}
         placeholder="Search by Name, Region, Subregion"
         className="bg-[#1B1D1F] h-14 w-[300px] px-4 outline-none text-primary"
         ref={inputRef}
