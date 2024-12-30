@@ -66,7 +66,7 @@ const Countries = ({ data }) => {
             <tr className="table-auto text-center text-secondary">
               <td className="text-6xl">{country.flag}</td>
               <td>
-                <Link to={`/country/${index}`} state={{country}}>
+                <Link to={`/country/${country.name.common}`} state={{country}}>
                   {country.name.common}
                 </Link>
               </td>

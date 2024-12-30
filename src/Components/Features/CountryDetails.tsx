@@ -1,27 +1,22 @@
 import { useState, useEffect } from "react"
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import InfoButton from "./InfoButton";
 import InfoCountry from "./InfoCountry";
 
 const CountryDetails = () => {
 
-  const [neighborCountry, setNeighborCountry] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [neighborCountry, setNeighborCountry] = useState([])
 
   const { state } = useLocation();
-  const params = useParams();
   const country = state?.country;
 
-  const fetchNeighboring = async (neighbors: string[]) => {
-    setLoading(true)
+  const fetchNeighboring = async (country: string[]) => {
     try {
       const response = await fetch("https://restcountries.com/v3.1/all")
       const data = await response.json()
       setNeighborCountry(data)
     } catch(err) {
       console.error(`Error for fetching ${err}`)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -29,14 +24,11 @@ const CountryDetails = () => {
     if (country?.borders?.length) fetchNeighboring(country)
   }, [country])
 
-  // if (!country) return <div>...Loading</div>
-const neighborBorder = neighborCountry.map( item => item.fifa)
-const matchingCode = neighborBorder.filter(fifa => country.borders.includes(fifa))
-console.log(matchingCode)
+  if (!country) return <div>...Loading</div>
+  console.log(country)
 
-
-
-
+ const neighbordBorders = neighborCountry.filter( item => item.borders?.includes(country.fifa))
+ console.log(neighbordBorders)
 
   return (
     <section className="bg-[#282B30] min-h-screen border border-[#6C727F] bottom-20 rounded-xl text-secondary">
@@ -57,8 +49,8 @@ console.log(matchingCode)
       <InfoCountry label="Suberegion" value={country.subregion}/>
       <InfoCountry label="Language" value={Object.values(country.languages).map(language => language)}/>
       <InfoCountry label="Currencies" value={Object.values(country.currencies).map((item) => item.name)}/>
-      <InfoCountry label="Continents" value={country.continents.map((item) => item).join(", ")}/>
-      <InfoCountry label="Neighbouring Countries" />
+      <InfoCountry label="Continents" value={country.continents.map(item => item).join(", ")}/>
+      <InfoCountry label="Neighbouring Countries" borders={neighbordBorders} country={country}/>
     </section>
   );
 };
