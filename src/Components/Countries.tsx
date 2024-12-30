@@ -5,8 +5,19 @@ import RegionStore from "../strore/RegionStrore";
 import { Link } from "react-router-dom";
 
 interface CountriesProps {
-  data: any[]
+  data: Country
   search: string
+}
+
+interface Country {
+  flag: string;
+  name: {
+    common: string; 
+    official?: string; 
+  };
+  population: number; 
+  area: number; 
+  region: string; 
 }
 
 const Countries = ({ data, search }: CountriesProps) => {
@@ -34,7 +45,7 @@ const Countries = ({ data, search }: CountriesProps) => {
 
   const sortedData = chooseSort(activeSort, data);
 
-  const applyFilter = (data: any[], ...filters) => {
+  const applyFilter = (data: Country[], ...filters) => {
     return filters.reduce((result, filterFunc) => filterFunc(result), data);
   };
 
@@ -78,7 +89,7 @@ const Countries = ({ data, search }: CountriesProps) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((country, index: number) => (
+          {filteredData.map((country: Country, index: number) => (
             <Fragment key={index}>
               <tr className="table-auto text-center text-secondary">
                 <td className="text-6xl">{country.flag}</td>

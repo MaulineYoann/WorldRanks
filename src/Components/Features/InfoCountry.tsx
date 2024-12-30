@@ -33,7 +33,7 @@ const InfoCountry = ({ label, value, borders }: InfoCountryProps) => {
               to={`/country/${item.name.common}`}
               state={{ country: item }}
             >
-              <div className="flex flex-col items-center gap-2 pb-5">
+              <div className="flex flex-col flex-wrap items-center gap-2 pb-5">
                 <img
                   src={item.flags.png}
                   alt={item.flags.alt}
