@@ -25,10 +25,8 @@ const CountryDetails = () => {
   }, [country])
 
   if (!country) return <div>...Loading</div>
-  console.log(country)
 
  const neighbordBorders = neighborCountry.filter( item => item.borders?.includes(country.fifa))
- console.log(neighbordBorders)
 
   return (
     <section className="bg-[#282B30] min-h-screen border border-[#6C727F] bottom-20 rounded-xl text-secondary">
