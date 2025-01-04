@@ -1,8 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
-import Header from "./Components/Header";
-import SectionComponent from "./Components/Section";
+import { BrowserRouter } from "react-router-dom"
+import Header from "./Components/Header"
+import SectionComponent from "./Components/Section"
 
-import Router from "./router/RoutesComponent";
+import Router from "./router/RoutesComponent"
 
 function App() {
   return (

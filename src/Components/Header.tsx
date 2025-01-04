@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import Hero from "../assets/hero.jpg";
-import Logo from "../assets/Logo.svg";
+import { NavLink } from "react-router-dom"
+import Hero from "../assets/hero.jpg"
+import Logo from "../assets/Logo.svg"
 
 const Header = () => {
   return (

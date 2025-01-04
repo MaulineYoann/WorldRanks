@@ -1,4 +1,4 @@
-import { useRef, ChangeEvent} from "react";
+import { useRef, ChangeEvent} from "react"
 
 interface searchProps {
   state: {
@@ -10,8 +10,8 @@ interface searchProps {
 const Input = ({state}: searchProps) => {
 
   const {search, setSearch} = state
-  const inputRef = useRef<HTMLInputElement>(null);
-  const handleClick = () => inputRef.current?.focus();
+  const inputRef = useRef<HTMLInputElement>(null)
+  const handleClick = () => inputRef.current?.focus()
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)
 

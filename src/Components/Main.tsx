@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import Input from "./Input";
-import Countries from "./Countries";
-import FilterComponent from "./FilterComponent";
+import { useEffect, useState } from "react"
+import Input from "./Input"
+import Countries from "./Countries"
+import FilterComponent from "./FilterComponent"
 
 const Main = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
   const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => setData(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   }, []);
 
 
@@ -31,5 +31,5 @@ const Main = () => {
   );
 };
 
-Main.displayName = "MainComponent";
-export default Main;
+Main.displayName = "MainComponent"
+export default Main
