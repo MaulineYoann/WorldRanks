@@ -35,12 +35,12 @@ const Countries = ({ data, search }: CountriesProps) => {
       alphabetical: (a, b) => a.name.common.localeCompare(b.name.common),
     }
   
-    return sortMethods[value] ? [...data].sort(sortMethods[value]) : data;
+    return sortMethods[value] ? [...data].sort(sortMethods[value]) : data
   }
 
   const sortedData = chooseSort(activeSort, data);
 
-  const applyFilter = (data: Country[], ...filters) => filters.reduce((result, filterFunc) => filterFunc(result), data);
+  const applyFilter = (data: Country[], ...filters) => filters.reduce((result, filterFunc) => filterFunc(result), data)
   
 
   const handleIndependant = (data: any[]) =>
