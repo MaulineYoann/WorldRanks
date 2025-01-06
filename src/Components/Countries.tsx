@@ -25,29 +25,23 @@ const Countries = ({ data, search }: CountriesProps) => {
   const { regionState } = RegionStore();
   const { unitedMember, independant } = MemberOrIndependant();
 
-  const addVirgule = (num: number): string =>
-    new Intl.NumberFormat("en-US").format(num);
+  const addVirgule = (num: number): string => new Intl.NumberFormat("en-US").format(num);
 
   const chooseSort = (value: string, data: any[]) => {
-    if (value === "population") {
-      return [...data].sort((a, b) => b.population - a.population);
+
+    const sortMethods: Record<string, (a: any, b: any) => number> = {
+      population: (a, b) => b.population - a.population,
+      area: (a, b) => b.area - a.area,
+      alphabetical: (a, b) => a.name.common.localeCompare(b.name.common),
     }
-    if (value === "area") {
-      return [...data].sort((a, b) => b.area - a.area);
-    }
-    if (value === "alphabetical") {
-      return [...data].sort((a, b) =>
-        a.name.common.localeCompare(b.name.common)
-      );
-    }
-    return data;
-  };
+  
+    return sortMethods[value] ? [...data].sort(sortMethods[value]) : data;
+  }
 
   const sortedData = chooseSort(activeSort, data);
 
-  const applyFilter = (data: Country[], ...filters) => {
-    return filters.reduce((result, filterFunc) => filterFunc(result), data);
-  };
+  const applyFilter = (data: Country[], ...filters) => filters.reduce((result, filterFunc) => filterFunc(result), data);
+  
 
   const handleIndependant = (data: any[]) =>
     independant ? [...data].filter((value) => value.independent) : data;
