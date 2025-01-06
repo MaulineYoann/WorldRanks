@@ -1,8 +1,8 @@
 import RegionStore from "../../strore/RegionStrore";
 interface ButtonProps {
-  children: string;
-  setSelect: React.Dispatch<React.SetStateAction<string[]>>;
-  select: string[];
+  children: string
+  setSelect: React.Dispatch<React.SetStateAction<string[]>>
+  select: string[]
 }
 
 const Button = ({ children, setSelect, select }: ButtonProps) => {
@@ -31,7 +31,7 @@ const Button = ({ children, setSelect, select }: ButtonProps) => {
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
 export default Button;

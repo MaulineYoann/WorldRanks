@@ -104,7 +104,7 @@ const Countries = ({ data, search }: CountriesProps) => {
         </tbody>
       </table>
     </>
-  );
-};
+  )
+}
 
 export default Countries;

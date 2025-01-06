@@ -28,8 +28,8 @@ const Main = () => {
         <Countries data={data} search={search}/>
       </section>
     </main>
-  );
-};
+  )
+}
 
 Main.displayName = "MainComponent"
 export default Main

@@ -41,7 +41,7 @@ const Input = ({state}: searchProps) => {
         ref={inputRef}
       />
     </div>
-  );
-};
+  )
+}
 
 export default Input;

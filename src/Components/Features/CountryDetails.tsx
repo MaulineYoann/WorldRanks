@@ -6,16 +6,16 @@ import InfoCountry from "./InfoCountry";
 const CountryDetails = () => {
   const [neighborCountry, setNeighborCountry] = useState([]);
 
-  const { state } = useLocation();
-  const country = state?.country;
+  const { state } = useLocation()
+  const country = state?.country
   
   const fetchNeighboring = async (country: string[]) => {
     try {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const data = await response.json();
-      setNeighborCountry(data);
+      const response = await fetch("https://restcountries.com/v3.1/all")
+      const data = await response.json()
+      setNeighborCountry(data)
     } catch (err) {
-      console.error(`Error for fetching ${err}`);
+      console.error(`Error for fetching ${err}`)
     }
   };
 
@@ -23,7 +23,7 @@ const CountryDetails = () => {
     if (country?.borders?.length) fetchNeighboring(country);
   }, [country]);
 
-  if (!country) return <div>...Loading</div>;
+  if (!country) return <div>...Loading</div>
 
   const neighbordBorders = neighborCountry.filter((item: string) =>
     item.borders?.includes(country.fifa)
