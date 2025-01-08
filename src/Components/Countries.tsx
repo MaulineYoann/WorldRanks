@@ -27,9 +27,9 @@ const Countries = ({ data, search }: CountriesProps) => {
 
   const addVirgule = (num: number): string => new Intl.NumberFormat("en-US").format(num);
 
-  const chooseSort = (value: string, data: any[]) => {
+  const chooseSort = (value: string, data: Country[]) => {
 
-    const sortMethods: Record<string, (a: any, b: any) => number> = {
+    const sortMethods: Record<string, (a, b) => number> = {
       population: (a, b) => b.population - a.population,
       area: (a, b) => b.area - a.area,
       alphabetical: (a, b) => a.name.common.localeCompare(b.name.common),

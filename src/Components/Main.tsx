@@ -3,9 +3,21 @@ import Input from "./Input"
 import Countries from "./Countries"
 import FilterComponent from "./FilterComponent"
 
+interface Country {
+  flag: string;
+  name: {
+    common: string; 
+    official?: string; 
+  };
+  population: number; 
+  area: number; 
+  region: string; 
+}
+
 const Main = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<Country[]>([])
   const [search, setSearch] = useState("")
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
