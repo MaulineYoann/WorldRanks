@@ -27,15 +27,15 @@ const Main = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        response.json();
+       return  response.json()
       })
       .then((data) => {
-        setData(data);
-        setLoading(false);
+        setData(data)
+        setLoading(false)
       })
       .catch((err) => {
-        setError(err.message);
-        setLoading(false);
+        setError(err.message)
+        setLoading(false)
       });
   }, []);
 
@@ -47,7 +47,7 @@ const Main = () => {
     <main className="bg-[#282B30] min-h-screen border border-[#6C727F] relative bottom-20 rounded-xl p-8 text-primary">
       <div className="flex justify-between items-center">
         <h4 className="text-primary font-bold tracking-wide">
-          Found {data.length} countries
+          Found {data.length || 0} countries
         </h4>
         <Input state={{ search, setSearch }} />
       </div>
