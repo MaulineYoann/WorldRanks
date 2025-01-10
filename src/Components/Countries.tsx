@@ -5,7 +5,7 @@ import RegionStore from "../strore/RegionStrore";
 import { Link } from "react-router-dom";
 
 interface CountriesProps {
-  data: Country
+  data: Country[]
   search: string
 }
 
@@ -17,8 +17,12 @@ interface Country {
   };
   population: number; 
   area: number; 
-  region: string; 
+  region: string;
+  subregion?: string
+  independent?: boolean
+  unMember?: boolean
 }
+ type FilterFunction = (data: Country[]) => Country[]
 
 const Countries = ({ data, search }: CountriesProps) => {
   const { activeSort } = SortStore();
@@ -28,31 +32,23 @@ const Countries = ({ data, search }: CountriesProps) => {
   const addVirgule = (num: number): string => new Intl.NumberFormat("en-US").format(num);
 
   const chooseSort = (value: string, data: Country[]) => {
-
-    const sortMethods: Record<string, (a, b) => number> = {
+    const sortMethods: Record<string, (a: Country, b: Country) => number> = {
       population: (a, b) => b.population - a.population,
       area: (a, b) => b.area - a.area,
       alphabetical: (a, b) => a.name.common.localeCompare(b.name.common),
     }
-  
     return sortMethods[value] ? [...data].sort(sortMethods[value]) : data
   }
 
   const sortedData = chooseSort(activeSort, data);
 
-  const applyFilter = (data: Country[], ...filters) => filters.reduce((result, filterFunc) => filterFunc(result), data)
+  const applyFilter = (data: Country[], ...filters: FilterFunction[]): Country[] => filters.reduce((result, filterFunc) => filterFunc(result), data)
   
+  const handleIndependant = (data: Country[]): Country[] => independant ? [...data].filter((value) => value.independent) : data;
+  const handleMember = (data: Country[]): Country[] => unitedMember ? [...data].filter((value) => value.unMember) : data;
+  const handleRegion = (data: Country[]): Country[] =>  regionState.length  ? [...data].filter((region) => regionState.includes(region.region)) : data;
 
-  const handleIndependant = (data: any[]) =>
-    independant ? [...data].filter((value) => value.independent) : data;
-  const handleMember = (data: any[]) =>
-    unitedMember ? [...data].filter((value) => value.unMember) : data;
-  const handleRegion = (data: any[]) =>
-    regionState.length
-      ? [...data].filter((region) => regionState.includes(region.region))
-      : data;
-
-  const handleSearch = (data: any[]) => {
+  const handleSearch = (data: Country[]): Country[] => {
     if (!search.trim()) return data;
     return data.filter(
       (item) =>
