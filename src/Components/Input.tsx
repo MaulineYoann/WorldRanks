@@ -3,7 +3,7 @@ import { useRef, ChangeEvent} from "react"
 interface searchProps {
   state: {
     search: string
-    setSearch: (event: ChangeEvent<HTMLInputElement>) => string
+    setSearch: React.Dispatch<React.SetStateAction<string>>;
   }
 }
 
