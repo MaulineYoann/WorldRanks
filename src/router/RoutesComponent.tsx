@@ -3,14 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import MainComponent from "../Components/Main";
 import CountryDetails from "../Components/Features/CountryDetails";
 import NotFound from "../Pages/NotFound";
-
-
-const routes = {
-  index: "/",
-  country: "/country",
-  CountryDetails: "country/:countryId",
-  error: "*"
-}
+import routes from "./Routes";
 
 const Router = () => {
   return (

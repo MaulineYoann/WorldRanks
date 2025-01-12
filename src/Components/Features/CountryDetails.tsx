@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import InfoButton from "./InfoButton";
 import InfoCountry from "./InfoCountry";
+import routes from "../../router/Routes";
 
 interface Country {
   name: {
@@ -47,7 +48,8 @@ const CountryDetails = () => {
   if (!country) return <div>...Loading</div>
 
   return (
-    <section className="bg-[#282B30] min-h-screen border border-[#6C727F] bottom-20 rounded-xl text-secondary">
+    <section className="bg-[#282B30] min-h-screen border border-[#6C727F] bottom-20 rounded-xl text-secondary relative">
+      <Link to={routes.index} className="absolute border p-3 cursor-pointer">Back to home</Link>
       <div className="flex items-center flex-col">
         <img
           alt={country.flags.alt}
