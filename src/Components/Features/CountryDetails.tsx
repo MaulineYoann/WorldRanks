@@ -63,8 +63,8 @@ const CountryDetails = () => {
         <InfoButton 
         label="Population" 
         value={country.population} />
-        <InfoButton l
-        abel="Area (km²)" 
+        <InfoButton
+        label="Area (km²)" 
         value={country.area} />
       </div>
       <InfoCountry 
