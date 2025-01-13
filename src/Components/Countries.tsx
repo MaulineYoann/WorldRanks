@@ -3,6 +3,7 @@ import SortStore from "../strore/SortStore";
 import MemberOrIndependant from "../strore/MemberOrIndependant";
 import RegionStore from "../strore/RegionStrore";
 import { Link } from "react-router-dom";
+import { useCallback, useMemo } from "react";
 
 interface CountriesProps {
   data: Country[]
@@ -40,31 +41,33 @@ const Countries = ({ data, search }: CountriesProps) => {
     return sortMethods[value] ? [...data].sort(sortMethods[value]) : data
   }
 
-  const sortedData = chooseSort(activeSort, data);
+  const sortedData = useMemo(() => chooseSort(activeSort, data), [activeSort, data])
 
   const applyFilter = (data: Country[], ...filters: FilterFunction[]): Country[] => filters.reduce((result, filterFunc) => filterFunc(result), data)
   
-  const handleIndependant = (data: Country[]): Country[] => independant ? [...data].filter((value) => value.independent) : data;
-  const handleMember = (data: Country[]): Country[] => unitedMember ? [...data].filter((value) => value.unMember) : data;
-  const handleRegion = (data: Country[]): Country[] =>  regionState.length  ? [...data].filter((region) => regionState.includes(region.region)) : data;
+  const handleIndependant = useCallback((data: Country[]): Country[] => independant ? [...data].filter((value) => value.independent) : data, [independant]) 
+  const handleMember = useCallback((data: Country[]): Country[] => unitedMember ? [...data].filter((value) => value.unMember) : data, [unitedMember]) 
+  const handleRegion = useCallback((data: Country[]): Country[] =>  regionState.length  ? [...data].filter((region) => regionState.includes(region.region)) : data, [regionState]) 
 
-  const handleSearch = (data: Country[]): Country[] => {
+  const handleSearch = useCallback((data: Country[]): Country[] => {
     if (!search.trim()) return data;
     return data.filter(
       (item) =>
         item.name.common.toLowerCase().includes(search.toLowerCase()) ||
         item.region.toLowerCase().includes(search.toLowerCase()) ||
         item.subregion?.toLowerCase().includes(search.toLowerCase())
-    );
-  };
+    )
+  }, [search]) 
 
-  const filteredData = applyFilter(
+  const filteredData = useMemo(() => {
+    return applyFilter(
     sortedData,
     handleIndependant,
     handleMember,
     handleRegion,
     handleSearch
   );
+  }, [sortedData, handleIndependant, handleMember, handleRegion, handleSearch]) 
 
   return (
     <>
