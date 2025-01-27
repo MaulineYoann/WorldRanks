@@ -8,7 +8,9 @@ const Header = () => {
       <img 
         src={Hero} 
         alt="banner" 
-        className="w-full" />
+        className="w-full"
+        loading="lazy"
+         />
         <NavLink to="/country">
       <img
         src={Logo}
