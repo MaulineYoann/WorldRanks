@@ -21,7 +21,6 @@ const Main = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => {
         if (!response.ok) {
