@@ -1,51 +1,52 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
 # WorldRanks
+
+WorldRanks est une application web qui permet d’explorer les pays du monde et de comparer leurs principales informations démographiques et géographiques.
+
+**Démo :** [globerank.netlify.app](https://globerank.netlify.app/)
+
+## Fonctionnalités
+
+- Parcourir les pays avec leur drapeau, leur nom, leur population, leur superficie et leur région.
+- Rechercher un pays par nom, région ou sous-région.
+- Trier les résultats par population, superficie ou ordre alphabétique.
+- Filtrer les pays par région, appartenance aux Nations Unies et indépendance.
+- Ouvrir une fiche détaillée avec la capitale, la sous-région, les langues, les monnaies, les continents et les pays voisins.
+
+## Technologies
+
+- React 18 et TypeScript
+- Vite
+- React Router
+- Zustand pour l’état des filtres et du tri
+- Tailwind CSS
+- [REST Countries API v3.1](https://restcountries.com/)
+
+## Lancer le projet en local
+
+Prérequis : Node.js et npm.
+
+```bash
+git clone https://github.com/MaulineYoann/WorldRanks.git
+cd WorldRanks
+npm install
+npm run dev
+```
+
+Vite affiche ensuite l’adresse locale à ouvrir dans le navigateur.
+
+## Scripts disponibles
+
+| Commande | Description |
+| --- | --- |
+| `npm run dev` | Lance le serveur de développement Vite. |
+| `npm run build` | Vérifie les types TypeScript et génère la version de production. |
+| `npm run preview` | Sert localement la version de production générée. |
+| `npm run lint` | Vérifie le code avec ESLint. |
+
+## Données
+
+Les données des pays sont récupérées depuis REST Countries au chargement de l’application. Une connexion Internet est donc nécessaire pour afficher la liste et les fiches détaillées.
+
+## À propos
+
+WorldRanks est un projet personnel réalisé avec React et TypeScript. L’interface de l’application est actuellement en anglais.
